@@ -23,6 +23,7 @@ namespace BlazorApp.Data
         public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
             _log.LogInformation("Getting the forecast");
+            _log.LogInformation("The random nuber is: {rando}", _db.GetUserAge());
             var rng = new Random();
             return Task.FromResult(Enumerable.Range(1,_db.GetUserAge()).Select(index => new WeatherForecast
             {
