@@ -13,16 +13,18 @@ namespace BlazorApp.Data
         };
 
         private readonly ILogger<WeatherForecastService> _log;
+        private readonly IDataAccess _db;
 
-        public WeatherForecastService(ILogger<WeatherForecastService> log)
+        public WeatherForecastService(ILogger<WeatherForecastService> log, IDataAccess db)
         {
             _log = log;
+            _db = db;
         }
         public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
             _log.LogInformation("Getting the forecast");
             var rng = new Random();
-            return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Task.FromResult(Enumerable.Range(1,_db.GetUserAge()).Select(index => new WeatherForecast
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
