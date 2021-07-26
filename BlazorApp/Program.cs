@@ -18,11 +18,24 @@ namespace BlazorApp
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logger =>
+                {
+                    logger.ClearProviders();
+                    // Log to the Console Output
+                    logger.AddConsole();
+                    // Log to the Debug window at appp start
+                    logger.AddDebug();
+
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        }
+            
     }
 }

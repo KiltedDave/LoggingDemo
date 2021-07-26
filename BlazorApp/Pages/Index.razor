@@ -7,11 +7,12 @@
 Welcome to your new app.
 
 @code{
-
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        log.LogInformation("Just opened the main page");
+
+        int id = 25;
+
+        log.LogInformation("Just opened the main page for id #{userId}", id);
     }
 }
